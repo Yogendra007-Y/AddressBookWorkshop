@@ -3,11 +3,18 @@ package com.example.demo.bridgelabz.dto;
 import lombok.Data;
 
 /**
- * @Data : Auto-generated getters and setters Methods, constructor And toString
+ * @Data : Auto-generate getters and setters, constructor, toString
  *
  */
 public @Data class ResponseDTO {
 
 	private String message;
 	private Object data;
+
+	public ResponseDTO(String message, Object data) {
+		super();
+		this.message = message;
+		this.data = data;
+	}
+
 }
