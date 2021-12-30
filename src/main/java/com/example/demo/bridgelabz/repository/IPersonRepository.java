@@ -1,5 +1,9 @@
 package com.example.demo.bridgelabz.repository;
 
-public interface IPersonRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.bridgelabz.model.PersonData;
+
+public interface IPersonRepository extends JpaRepository<PersonData, Long> {
 
 }
