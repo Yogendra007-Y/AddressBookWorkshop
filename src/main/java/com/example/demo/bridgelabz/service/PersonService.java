@@ -31,7 +31,7 @@ public class PersonService implements IPersonService {
 	/**
 	 * Call Get method
 	 * 
-	 * @param id : contact Id
+	 * @param id : contact Ids
 	 * @return : Contact details of the person
 	 */
 	@Override
