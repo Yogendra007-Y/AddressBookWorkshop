@@ -1,41 +1,34 @@
 package com.example.demo.bridgelabz.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 import com.example.demo.bridgelabz.dto.AddressBookDTO;
 
 import lombok.Data;
-
-
 @Entity
 public @Data class AddressBookModel {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "book_id")
 	private int bookId;
+	
 	private String addressBookName;
 	
-	
-	public AddressBookModel(int bookId, String addressBookName) {
+	public AddressBookModel() {
 		super();
-		this.bookId = bookId;
-		this.addressBookName = addressBookName;
 	}
 
-	public AddressBookModel(AddressBookDTO addressDTO) {
+	public AddressBookModel(AddressBookDTO bookDTO) {
+		super();
+		this.updateAddressBookData(bookDTO);
 	}
 
-	@OneToMany(targetEntity = PersonData.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "add_id",referencedColumnName = "bookId")
-	private List<PersonData>personList;
+	public void updateAddressBookData(AddressBookDTO bookDTO) {
+		this.addressBookName = bookDTO.addressBookName;
 	}
-
-
+}

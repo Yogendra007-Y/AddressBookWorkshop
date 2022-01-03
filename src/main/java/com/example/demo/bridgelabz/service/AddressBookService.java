@@ -12,20 +12,61 @@ import com.example.demo.bridgelabz.repository.IAddressBookRepository;
 @Service
 public class AddressBookService implements IAddressBookService {
 	@Autowired
-	private IAddressBookRepository addressBookRepositoty;
-	
+	private IAddressBookRepository addressBook;
+
+	/**
+	 * create address book
+	 * 
+	 * @return : addressBookData
+	 */
+	@Override
+	public AddressBookModel createAddressBookData(AddressBookDTO bookDTO) {
+		AddressBookModel addressBookData = null;
+		addressBookData = new AddressBookModel(bookDTO);
+		return addressBook.save(addressBookData);
+	}
+
+	/**
+	 * update address book by addressbookId
+	 * 
+	 * @param : addressbookId, AddressBookDTO
+	 */
+	@Override
+	public AddressBookModel updateAddressBookData(int addressbookId, AddressBookDTO bookDTO) {
+		AddressBookModel addressBookData = this.getAddressBookDataById(addressbookId);
+		addressBookData.updateAddressBookData(bookDTO);
+		return addressBook.save(addressBookData);
+	}
+
+	/**
+	 * get all address book
+	 * 
+	 * @return : addressBookData
+	 */
 	@Override
 	public List<AddressBookModel> getAddressBookData() {
-		return addressBookRepositoty.findAll();
+		return addressBook.findAll();
 	}
 
+	/**
+	 * get address book by addressbookId
+	 * 
+	 * @return : addressBookData
+	 */
 	@Override
-	public AddressBookModel createPersonData(AddressBookDTO addressDTO) {
-		AddressBookModel addressData = null;
-		addressData  = new AddressBookModel(addressDTO);
-		return addressBookRepositoty.save(addressData );
+	public AddressBookModel getAddressBookDataById(int addressbookId) {
+		return addressBook.findById(addressbookId).get();
 	}
 
-
+	/**
+	 * delete address book by addressbookId
+	 * 
+	 * @return : addressBookData
+	 */
+	@Override
+	public void deleteAddressBookData(int addressbookId) {
+		AddressBookModel addressBookData = this.getAddressBookDataById(addressbookId);
+		addressBook.delete(addressBookData);
+	}
 
 }

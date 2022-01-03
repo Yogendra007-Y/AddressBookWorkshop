@@ -10,8 +10,13 @@ import com.example.demo.bridgelabz.model.AddressBookModel;
 @Service
 public interface IAddressBookService {
 
+	AddressBookModel createAddressBookData(AddressBookDTO bookDTO);
+
+	AddressBookModel updateAddressBookData(int addressbookId, AddressBookDTO bookDTO);
 
 	List<AddressBookModel> getAddressBookData();
 
-	AddressBookModel createPersonData(AddressBookDTO addressDTO);
+	AddressBookModel getAddressBookDataById(int id);
+
+	void deleteAddressBookData(int id);
 }
