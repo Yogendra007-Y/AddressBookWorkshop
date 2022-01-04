@@ -13,7 +13,7 @@ import lombok.Data;
 public @Data class AddressBookModel {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "book_id")
 	private int bookId;
 	

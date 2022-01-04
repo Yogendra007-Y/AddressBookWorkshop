@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bridgelabz.dto.AddressBookDTO;
+import com.example.demo.bridgelabz.exception.PersonException;
 import com.example.demo.bridgelabz.model.AddressBookModel;
 import com.example.demo.bridgelabz.repository.IAddressBookRepository;
 
@@ -17,6 +18,7 @@ public class AddressBookService implements IAddressBookService {
 	/**
 	 * create address book
 	 * 
+	 * @param AddressBookDTO
 	 * @return : addressBookData
 	 */
 	@Override
@@ -30,6 +32,7 @@ public class AddressBookService implements IAddressBookService {
 	 * update address book by addressbookId
 	 * 
 	 * @param : addressbookId, AddressBookDTO
+	 * @return : addressBookData
 	 */
 	@Override
 	public AddressBookModel updateAddressBookData(int addressbookId, AddressBookDTO bookDTO) {
@@ -51,16 +54,19 @@ public class AddressBookService implements IAddressBookService {
 	/**
 	 * get address book by addressbookId
 	 * 
+	 * @param : addressbookId
 	 * @return : addressBookData
 	 */
 	@Override
 	public AddressBookModel getAddressBookDataById(int addressbookId) {
-		return addressBook.findById(addressbookId).get();
+		return addressBook.findById(addressbookId).orElseThrow(
+				() -> new PersonException("address book with id " + addressbookId + " does not exist !..."));
 	}
 
 	/**
 	 * delete address book by addressbookId
 	 * 
+	 * @param : addressbookId
 	 * @return : addressBookData
 	 */
 	@Override

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bridgelabz.dto.PersonDTO;
+import com.example.demo.bridgelabz.exception.PersonException;
 import com.example.demo.bridgelabz.model.AddressBookModel;
 import com.example.demo.bridgelabz.model.PersonData;
 import com.example.demo.bridgelabz.repository.IAddressBookRepository;
@@ -70,7 +71,8 @@ public class PersonService implements IPersonService {
 	 */
 	@Override
 	public PersonData getPersonDataById(int addressbookId, int personId) {
-		return personRepository.findById((long) personId).get();
+		return personRepository.findById((long) personId)
+				.orElseThrow(() -> new PersonException("User with User id " + personId + " does not exist !..."));
 	}
 
 	/**

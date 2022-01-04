@@ -2,6 +2,8 @@ package com.example.demo.bridgelabz.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,7 @@ public class AddressBookController {
 	 * create address book
 	 */
 	@PostMapping("/Create")
-	public ResponseEntity<ResponseDTO> createAddressBookData(@RequestBody AddressBookDTO bookDTO) {
+	public ResponseEntity<ResponseDTO> createAddressBookData(@Valid @RequestBody AddressBookDTO bookDTO) {
 		AddressBookModel createBook = null;
 		createBook = addressBookService.createAddressBookData(bookDTO);
 		ResponseDTO respDTO = new ResponseDTO("created address book successfully", createBook);
